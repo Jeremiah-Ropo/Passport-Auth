@@ -1,6 +1,24 @@
 const express = require('express');
+const expressLayout = require('express-ejs-layouts');
+const mongoose = require('mongoose');
 
 const app = express();
+
+//DB config
+const db = require('./config/key').MongoURI;
+
+// Connect mongoose
+mongoose.connect(db, { useNewUrlParser: true})
+    .then(() => console.log('mongoose connect...'))
+    .catch((err) => console.log(err));
+
+
+//EJS
+app.use(expressLayout);
+app.set('view engine', 'ejs');
+
+// BodyParser
+app.use(express.urlencoded({extended: false}));
 
 
 // Routes

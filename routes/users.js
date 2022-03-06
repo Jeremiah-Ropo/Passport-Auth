@@ -19,11 +19,11 @@ router.post('/register', (req,res) => {
 
     //Check required fields
     if(!name || !email || !password || !password2){
-        errors.push({msg: 'Pls, fill properly '});
+        errors.push({msg: 'Please, fill properly '});
     }
 
     if (password !== password2){
-        errors.push({msg: 'Passowrd do not match'});
+        errors.push({msg: 'Password do not match'});
     }
 
     if (password.length < 6){
@@ -86,5 +86,12 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 })
 
+//Logout
+
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success_msg',  'You are logged out');
+    res.redirect('/users/login');
+})
 
 module.exports = router;
